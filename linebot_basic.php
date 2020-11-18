@@ -72,7 +72,7 @@ function send_reply_message($url, $post_header, $post_body)
 	return $result;
 }
 
-function mySQL_selectAll($url)
+function mySQL_selectperson($url)
 {
 	$result = file_get_contents($url);
 	
@@ -83,6 +83,21 @@ function mySQL_selectAll($url)
 	foreach($result_json as $values) {
 		$data .= $values["stuid"] . " " . $values["fullname"]. "\r\n";
 	}
+function mySQL_selectAll($url)
+{
+	$result = file_get_contents($url);
+	
+	$result_json = json_decode($result, true); //var_dump($result_json);
+	
+	$data = "ผลลัพธ์:\r\n";
+		
+	foreach($result_json as $values) {
+		$data .= $values["user_stuid"] . " " . $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
+	}
+	
+	return $data;
+}
+
 function mySQL_select($url, $word)
 {
 	$result = file_get_contents($url);
@@ -105,6 +120,8 @@ function mySQL_select($url, $word)
 		$data .= $values["user_stuid"] . " " . $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
 		}
 		
+		
+	}	
 	
 	return $data;
 }
