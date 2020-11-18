@@ -23,15 +23,18 @@ foreach ($request_json['events'] as $event)
 			
 			//$reply_message = mySQL_selectAll('http://s61160191.kantit.com/json_select.php');
                         
-                        if($test[1] == "ฉันต้องการค้นหาข้อมูลนิสิตทั้งหมด"){
+                       if($test[1] == "ฉันต้องการค้นหาข้อมูลนิสิตทั้งหมด"){
 				$reply_message = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
 			}
 			if($test[1] == "ฉันต้องการค้นหาข้อมูลนิสิตชื่อ" || $test[1] == "ฉันต้องการค้นหาข้อมูลนิสิต" || $test[1] == "ฉันต้องการค้นหาข้อมูลรหัสนิสิต" || $test[1] == "ฉันต้องการค้นหาข้อมูลนิสิตนามสกุล"){
 				$reply_message = mySQL_select('http://bot.kantit.com/json_select_users.php',$test[2]);
-                                   
+			}
+			
+			
 		} else {
 			$reply_message = 'ฉันได้รับ '.$event['message']['type'].' ของคุณแล้ว!';
 		}
+				
 	} else {
 		$reply_message = 'ฉันได้รับ Event '.$event['type'].' ของคุณแล้ว!';
 	}
@@ -41,7 +44,7 @@ foreach ($request_json['events'] as $event)
 	$data = ['replyToken' => $event['replyToken'], 'messages' => [['type' => 'text', 'text' => $reply_message]]];
 	$post_body = json_encode($data);
 	$send_result = replyMessage('https://api.line.me/v2/bot/message/reply', $post_header, $post_body);
-
+	//$send_result = send_reply_message('https://api.line.me/v2/bot/message/reply', $post_header, $post_body);
 }
 
 function replyMessage($url, $post_header, $post_body)
@@ -111,8 +114,7 @@ function mySQL_select($url, $word)
 		$data = "พบ:\r\n";	
 		$data .= $values["user_stuid"] . " " . $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
 		}
-		
-		
+	
 	}	
 	
 	return $data;
