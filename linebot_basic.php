@@ -3,6 +3,7 @@
 $channelAccessToken = 'rRRj2HG/u9JyvLzcxbJdugY1M1xYBHNRtoaZ9+LNSlcPOXr6JcZlfD0nS1ytHdMZPiXEUmqFRW/Yh/WwP/o7La5DYG7LYAFRb1o9o3z9ie5/clIuZ9Eqb1S17Zx0Oh3wtdzDwDq3JFv2gtEsEHprlAdB04t89/1O/w1cDnyilFU='; // Access Token ค่าที่เราสร้างขึ้น
 
 $request = file_get_contents('php://input');   // Get request content
+
 $request_json = json_decode($request, true);   // Decode JSON request
 
 foreach ($request_json['events'] as $event)
@@ -12,16 +13,16 @@ foreach ($request_json['events'] as $event)
 		if($event['message']['type'] == 'text')
 		{
 			$text = $event['message']['text'];
-			//$test = explode(" ", $text);
-			//$reply_message = 'ฉันได้รับข้อความ '. $text.' ของคุณแล้ว!';   
-			//$reply_message = $test[1]." ".'Ratanaporn'; 
+			$test = explode(" ", $text);
+			$reply_message = 'ฉันได้รับข้อความ '. $text.' ของคุณแล้ว!';   
+			$reply_message = $test[1]." ".'Ratanaporn'; 
 			//$reply_message = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
 			
-			if($text[1] == "ฉันต้องการค้นหาข้อมูลนิสิตทั้งหมด"){
+			if($test[1] == "ฉันต้องการค้นหาข้อมูลนิสิตทั้งหมด"){
 				$reply_message = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
 			}
-			if($text[1] == "ฉันต้องการค้นหาข้อมูลนิสิตชื่อ" || $text[1] == "ฉันต้องการค้นหาข้อมูลนิสิต" || $text[1] == "ฉันต้องการค้นหาข้อมูลรหัสนิสิต" || $text[1] == "ฉันต้องการค้นหาข้อมูลนิสิตนามสกุล"){
-				$reply_message = mySQL_select('http://bot.kantit.com/json_select_users.php',$text[2]);
+			if($test[1] == "ฉันต้องการค้นหาข้อมูลนิสิตชื่อ" || $test[1] == "ฉันต้องการค้นหาข้อมูลนิสิต" || $test[1] == "ฉันต้องการค้นหาข้อมูลรหัสนิสิต" || $test[1] == "ฉันต้องการค้นหาข้อมูลนิสิตนามสกุล"){
+				$reply_message = mySQL_select('http://bot.kantit.com/json_select_users.php',$test[2]);
 			}
 			
 			
@@ -38,7 +39,6 @@ foreach ($request_json['events'] as $event)
 	$data = ['replyToken' => $event['replyToken'], 'messages' => [['type' => 'text', 'text' => $reply_message]]];
 	$post_body = json_encode($data);
 	$send_result = replyMessage('https://api.line.me/v2/bot/message/reply', $post_header, $post_body);
-	//$send_result = send_reply_message('https://api.line.me/v2/bot/message/reply', $post_header, $post_body);
 }
 
 function replyMessage($url, $post_header, $post_body)
@@ -90,7 +90,7 @@ function mySQL_selectAll($url)
 function mySQL_select($url, $word)
 {
 	$result = file_get_contents($url);
-	$send = $word;
+	$sen = $word;
 	$result_json = json_decode($result, true); //var_dump($result_json);
 	
 	$data = "ไม่พบ:\r\n";	
@@ -107,6 +107,7 @@ function mySQL_select($url, $word)
 		$data = "พบ:\r\n";	
 		$data .= $values["user_stuid"] . " " . $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
 		}
+		
 		
 	}	
 	
