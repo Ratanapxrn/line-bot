@@ -91,7 +91,7 @@ function mySQL_selectAll($url)
 function mySQL_select($url, $word)
 {
 	$result = file_get_contents($url);
-	$sen = $word;
+	$send = $word;
 	$result_json = json_decode($result, true); //var_dump($result_json);
 	
 	$data = "ไม่พบ:\r\n";	
@@ -103,7 +103,6 @@ function mySQL_select($url, $word)
 		else{
 		$first = str_replace("นางสาว","",$values["user_firstname"]);
 		}
-		
 		
 		if($word == $values["user_stuid"] || $word == $first || $word == $values["user_lastname"]){
 		$data = "พบ:\r\n";	
