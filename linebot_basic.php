@@ -16,9 +16,10 @@ foreach ($request_json['events'] as $event)
 			
 			$test = explode(" ", $text);
 			
+			$reply_message = $test[1]." ".'Ratanaporn\r\n'; 
 			//$reply_message = 'Ratanaporn';   
 			
-			$reply_message = mySQL_selectAll('http://s61160191.kantit.com/json_select.php');
+			//$reply_message = mySQL_selectAll('http://s61160191.kantit.com/json_select.php');
                         
                         if($test[1] == "ฉันต้องการค้นหาข้อมูลนิสิตทั้งหมด"){
 				$reply_message = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
