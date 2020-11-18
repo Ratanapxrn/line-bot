@@ -13,12 +13,9 @@ foreach ($request_json['events'] as $event)
 		if($event['message']['type'] == 'text')
 		{
 			$text = $event['message']['text'];
-			
 			$test = explode(" ", $text);
-			
-			$reply_message = 'ฉันได้รับข้อความ '. $text.' ของคุณแล้ว!';
-			
-			//$reply_message = $test[1]." ".'Ratanaporn\r\n'; 
+			//$reply_message = 'ฉันได้รับข้อความ '. $text.' ของคุณแล้ว!';
+			//$reply_message = $test[1]." ".'Ratanaporn'; 
 			//$reply_message = 'Ratanaporn';   
 			//$reply_message = mySQL_selectAll('http://s61160191.kantit.com/json_select.php');
                         
