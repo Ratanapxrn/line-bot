@@ -1,9 +1,8 @@
 <?php
 
-$channelAccessToken = 'LMDIqKTxWZof2OfFrmm7YSW/TpM8SijL/8NQfLolQTG+/ru/KHqSVCdV5U716j4OPiXEUmqFRW/Yh/WwP/o7La5DYG7LYAFRb1o9o3z9ie5GK40hgxBawkpB2bCUo14WE3s0Tup/+L7QTCNDW8pGswdB04t89/1O/w1cDnyilFU='; // Access Token ค่าที่เราสร้างขึ้น
+$channelAccessToken = 'rRRj2HG/u9JyvLzcxbJdugY1M1xYBHNRtoaZ9+LNSlcPOXr6JcZlfD0nS1ytHdMZPiXEUmqFRW/Yh/WwP/o7La5DYG7LYAFRb1o9o3z9ie5/clIuZ9Eqb1S17Zx0Oh3wtdzDwDq3JFv2gtEsEHprlAdB04t89/1O/w1cDnyilFU='; // Access Token ค่าที่เราสร้างขึ้น
 
 $request = file_get_contents('php://input');   // Get request content
-
 $request_json = json_decode($request, true);   // Decode JSON request
 
 foreach ($request_json['events'] as $event)
@@ -13,16 +12,16 @@ foreach ($request_json['events'] as $event)
 		if($event['message']['type'] == 'text')
 		{
 			$text = $event['message']['text'];
-			$test = explode(" ", $text);
-			$reply_message = 'ฉันได้รับข้อความ '. $text.' ของคุณแล้ว!';   
-			$reply_message = $test[1]." ".'Ratanaporn'; 
+			//$test = explode(" ", $text);
+			//$reply_message = 'ฉันได้รับข้อความ '. $text.' ของคุณแล้ว!';   
+			//$reply_message = $test[1]." ".'Ratanaporn'; 
 			//$reply_message = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
 			
-			if($test[1] == "ฉันต้องการค้นหาข้อมูลนิสิตทั้งหมด"){
+			if($text[1] == "ฉันต้องการค้นหาข้อมูลนิสิตทั้งหมด"){
 				$reply_message = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
 			}
-			if($test[1] == "ฉันต้องการค้นหาข้อมูลนิสิตชื่อ" || $test[1] == "ฉันต้องการค้นหาข้อมูลนิสิต" || $test[1] == "ฉันต้องการค้นหาข้อมูลรหัสนิสิต" || $test[1] == "ฉันต้องการค้นหาข้อมูลนิสิตนามสกุล"){
-				$reply_message = mySQL_select('http://bot.kantit.com/json_select_users.php',$test[2]);
+			if($text[1] == "ฉันต้องการค้นหาข้อมูลนิสิตชื่อ" || $text[1] == "ฉันต้องการค้นหาข้อมูลนิสิต" || $text[1] == "ฉันต้องการค้นหาข้อมูลรหัสนิสิต" || $text[1] == "ฉันต้องการค้นหาข้อมูลนิสิตนามสกุล"){
+				$reply_message = mySQL_select('http://bot.kantit.com/json_select_users.php',$text[2]);
 			}
 			
 			
@@ -108,7 +107,6 @@ function mySQL_select($url, $word)
 		$data = "พบ:\r\n";	
 		$data .= $values["user_stuid"] . " " . $values["user_firstname"] . " " . $values["user_lastname"] . "\r\n";
 		}
-		
 		
 	}	
 	
