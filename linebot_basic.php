@@ -14,7 +14,7 @@ foreach ($request_json['events'] as $event)
 		{
 			$text = $event['message']['text'];
 			
-			$reply_message = 'ฉันได้รับ '.$event['message']['type'].' ของคุณแล้ว!';
+			$test = explode(" ", $text);
 			
 			//$reply_message = 'Ratanaporn';   
 			
