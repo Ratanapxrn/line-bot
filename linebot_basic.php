@@ -16,6 +16,8 @@ foreach ($request_json['events'] as $event)
 			
 			$test = explode(" ", $text);
 			
+			$reply_message = 'ฉันได้รับข้อความ '. $text.' ของคุณแล้ว!';
+			
 			$reply_message = $test[1]." ".'Ratanaporn\r\n'; 
 			//$reply_message = 'Ratanaporn';   
 			
@@ -73,17 +75,6 @@ function send_reply_message($url, $post_header, $post_body)
 	return $result;
 }
 
-function mySQL_selectperson($url)
-{
-	$result = file_get_contents($url);
-	
-	$result_json = json_decode($result, true); //var_dump($result_json);
-	
-	$data = "ผลลัพธ์:\r\n";
-		
-	foreach($result_json as $values) {
-		$data .= $values["stuid"] . " " . $values["fullname"]. "\r\n";
-	}
 function mySQL_selectAll($url)
 {
 	$result = file_get_contents($url);
