@@ -19,7 +19,7 @@ foreach ($request_json['events'] as $event)
 			//$reply_message = 'Ratanaporn';   
 			
 			$reply_message = mySQL_selectAll('http://s61160191.kantit.com/json_select.php');
-                        }
+                        
                         if($test[1] == "ฉันต้องการค้นหาข้อมูลนิสิตทั้งหมด"){
 				$reply_message = mySQL_selectAll('http://bot.kantit.com/json_select_users.php');
 			}
